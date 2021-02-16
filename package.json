@@ -4,7 +4,7 @@
     "description": "MERN shopping cart add",
     "main": "server.js",
     "scripts": {
-        "start": "node backend/server.js"
+        "start": "node backend/server.js & (cd frontend && npm start)"
     },
     "repository": {
         "type": "git",
