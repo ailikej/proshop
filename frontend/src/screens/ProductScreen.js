@@ -6,6 +6,7 @@ import Rating from '../components/Rating'
 import { listProductDetails, createProductReview, listTopProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Meta from '../components/Meta'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = ({ history, match }) => {
@@ -65,6 +66,7 @@ const ProductScreen = ({ history, match }) => {
                 <Message variant='danger'>{error}</Message>
             ) : (
                 <>
+                    <Meta title={product.name}/>
                     <Row>
                         <Col md={6}>
                             <Image src={product.image} alt={product.name} fluid />
@@ -76,7 +78,10 @@ const ProductScreen = ({ history, match }) => {
                                     <h3>{product.name}</h3>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                                    <Rating
+                                        value={product.rating}
+                                        text={`${product.numReviews} reviews`}
+                                    />
                                 </ListGroup.Item>
                                 <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
                                 <ListGroup.Item>Description: {product.description}</ListGroup.Item>
@@ -97,7 +102,11 @@ const ProductScreen = ({ history, match }) => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Status:</Col>
-                                            <Col>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Col>
+                                            <Col>
+                                                {product.countInStock > 0
+                                                    ? 'In Stock'
+                                                    : 'Out Of Stock'}
+                                            </Col>
                                         </Row>
                                     </ListGroup.Item>
                                     {product.countInStock > 0 && (
@@ -110,7 +119,9 @@ const ProductScreen = ({ history, match }) => {
                                                         value={qty}
                                                         onChange={(e) => setQty(e.target.value)}
                                                     >
-                                                        {[...Array(product.countInStock).keys()].map((x) => (
+                                                        {[
+                                                            ...Array(product.countInStock).keys(),
+                                                        ].map((x) => (
                                                             <option key={x + 1} value={x + 1}>
                                                                 {x + 1}
                                                             </option>
@@ -151,10 +162,14 @@ const ProductScreen = ({ history, match }) => {
                                 <ListGroup.Item>
                                     <h2>Write a Customer Review</h2>
                                     {successProductReview && (
-                                        <Message variant='success'>Review submitted successfully</Message>
+                                        <Message variant='success'>
+                                            Review submitted successfully
+                                        </Message>
                                     )}
                                     {loadingProductReview && <Loader />}
-                                    {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+                                    {errorProductReview && (
+                                        <Message variant='danger'>{errorProductReview}</Message>
+                                    )}
                                     {userInfo ? (
                                         <Form onSubmit={submitHandler}>
                                             <Form.Group controlId='rating'>
@@ -181,13 +196,18 @@ const ProductScreen = ({ history, match }) => {
                                                     onChange={(e) => setComment(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
-                                            <Button disabled={loadingProductReview} type='submit' variant='primary'>
+                                            <Button
+                                                disabled={loadingProductReview}
+                                                type='submit'
+                                                variant='primary'
+                                            >
                                                 Submit
                                             </Button>
                                         </Form>
                                     ) : (
                                         <Message>
-                                            Please <Link to='/login'>sign in</Link> to write a review{' '}
+                                            Please <Link to='/login'>sign in</Link> to write a
+                                            review{' '}
                                         </Message>
                                     )}
                                 </ListGroup.Item>
