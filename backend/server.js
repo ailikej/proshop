@@ -11,7 +11,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
 dotenv.config()
-
+console.log('check MONGO_URI type:' + typeof process.env.MONGO_URI)
 connectDB()
 
 const app = express()
