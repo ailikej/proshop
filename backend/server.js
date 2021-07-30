@@ -12,6 +12,7 @@ import uploadRoutes from './routes/uploadRoutes.js'
 
 dotenv.config()
 console.log('check MONGO_URI type:' + typeof process.env.MONGO_URI)
+console.log('The MONGO_URI is :' + process.env.MONGO_URI)
 connectDB()
 
 const app = express()
