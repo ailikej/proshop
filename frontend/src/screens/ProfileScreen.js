@@ -33,8 +33,8 @@ const ProfileScreen = ({ location, history }) => {
         if (!userInfo) {
             history.push('/login')
         } else {
-            if (!user || !user.name) {
-                // dispatch({ type: USER_UPDATE_PROFILE_RESET })
+            if (!user || !user.name || success) {
+                dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
                 dispatch(listMyOrders())
             } else {
@@ -42,7 +42,7 @@ const ProfileScreen = ({ location, history }) => {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, history, userInfo, user])
+    }, [dispatch, history, userInfo, user, success])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -59,9 +59,7 @@ const ProfileScreen = ({ location, history }) => {
                 <h2>User Profile</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
-                {success && (
-                    <Message variant='success'>Profile Updated</Message>
-                )}
+                {success && <Message variant='success'>Profile Updated</Message>}
                 {loading ? (
                     <Loader />
                 ) : error ? (
@@ -104,9 +102,7 @@ const ProfileScreen = ({ location, history }) => {
                                 type='password'
                                 placeholder='Confirm password'
                                 value={confirmPassword}
-                                onChange={(e) =>
-                                    setConfirmPassword(e.target.value)
-                                }
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
 
@@ -123,13 +119,7 @@ const ProfileScreen = ({ location, history }) => {
                 ) : errorOrders ? (
                     <Message variant='danger'>{errorOrders}</Message>
                 ) : (
-                    <Table
-                        striped
-                        bordered
-                        hover
-                        responsive
-                        className='table-sm'
-                    >
+                    <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -167,13 +157,8 @@ const ProfileScreen = ({ location, history }) => {
                                         )}
                                     </td>
                                     <td>
-                                        <LinkContainer
-                                            to={`/order/${order._id}`}
-                                        >
-                                            <Button
-                                                className='btn-sm'
-                                                variant='light'
-                                            >
+                                        <LinkContainer to={`/order/${order._id}`}>
+                                            <Button className='btn-sm' variant='light'>
                                                 Details
                                             </Button>
                                         </LinkContainer>
