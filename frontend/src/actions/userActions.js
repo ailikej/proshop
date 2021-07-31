@@ -26,7 +26,6 @@ import {
     USER_UPDATE_REQUEST,
 } from '../constants/userConstants'
 import {
-    ORDER_CREATE_RESET,
     ORDER_LIST_MY_RESET,
 } from '../constants/orderConstants'
 

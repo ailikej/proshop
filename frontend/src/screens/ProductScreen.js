@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import { listProductDetails, createProductReview, listTopProducts } from '../actions/productActions'
+import { listProductDetails, createProductReview } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Meta from '../components/Meta'
@@ -36,7 +36,7 @@ const ProductScreen = ({ history, match }) => {
             setComment('')
             dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
         }
-        // if (!product._id || product._id !== match.params.id) {
+        //** */ if (!product._id || product._id !== match.params.id) {
         // }
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match, successProductReview])
@@ -66,7 +66,7 @@ const ProductScreen = ({ history, match }) => {
                 <Message variant='danger'>{error}</Message>
             ) : (
                 <>
-                    <Meta title={product.name}/>
+                    <Meta title={product.name} />
                     <Row>
                         <Col md={6}>
                             <Image src={product.image} alt={product.name} fluid />
