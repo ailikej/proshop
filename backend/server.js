@@ -8,11 +8,14 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 dotenv.config()
 
 import connectDB from './config/db.js'
-
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+
+const MONGO_URI = process.env.MONGO_URI
+console.log('check MONGO_URI type: ' + typeof process.env.MONGO_URI)
+console.log('The MONGO_URI is: ' + process.env.MONGO_URI)
 
 connectDB()
 
@@ -24,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
+// endpoints
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
@@ -46,8 +50,8 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-app.use(notFound)
-app.use(errorHandler)
+app.use(notFound) // middleware
+app.use(errorHandler) // middleware
 
 const PORT = process.env.PORT || 5000
 
