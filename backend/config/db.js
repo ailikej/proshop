@@ -1,13 +1,15 @@
 import mongoose from 'mongoose'
 
 const connectDB = async () => {
-    const MONGO_URI = process.env.MONGO_URI
     try {
-        const conn = await mongoose.connect(MONGO_URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useCreateIndex: true,
-        })
+        const conn = await mongoose.connect(
+            'mongodb+srv://eric1234:eric1234@cluster0.op9dn.mongodb.net/proshop',
+            {
+                useUnifiedTopology: true,
+                useNewUrlParser: true,
+                useCreateIndex: true,
+            }
+        )
 
         console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
     } catch (error) {
