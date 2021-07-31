@@ -13,7 +13,6 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
-const MONGO_URI = process.env.MONGO_URI
 console.log('check MONGO_URI type: ' + typeof process.env.MONGO_URI)
 console.log('The MONGO_URI is: ' + process.env.MONGO_URI)
 
