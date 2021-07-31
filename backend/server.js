@@ -4,13 +4,14 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+
+dotenv.config()
+
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-
-dotenv.config()
 
 const MONGO_URI = process.env.MONGO_URI
 console.log('check MONGO_URI type: ' + typeof process.env.MONGO_URI)
