@@ -1,15 +1,14 @@
 import mongoose from 'mongoose'
-// mongodb+srv://eric1234:eric1234@cluster0.op9dn.mongodb.net/proshop
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(
-            'mongodb+srv://eric1234:eric1234@cluster0.op9dn.mongodb.net/proshop',
-            {
-                useUnifiedTopology: true,
-                useNewUrlParser: true,
-                useCreateIndex: true,
-            }
-        )
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            // const conn = await mongoose.connect(
+            //     'mongodb+srv://eric1234:eric1234@cluster0.op9dn.mongodb.net/proshop',
+            //     {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+            useCreateIndex: true,
+        })
 
         console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
     } catch (error) {
